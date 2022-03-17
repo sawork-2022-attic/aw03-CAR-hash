@@ -87,4 +87,9 @@ public class PosController {
         return "index";
     }
 
+    @GetMapping("/charge")
+    public String charge(){
+        return "pay";
+    }
+
 }

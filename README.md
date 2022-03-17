@@ -8,7 +8,7 @@
 
 ## 概述
 
-​		利用thymeleaf和Spring MVC,完成WebPos的几个增删查改功能。
+​		利用thymeleaf和Spring MVC,完成WebPos的几个增删查改功能，以及简单的支付页面跳转。
 
 ## 内容
 
@@ -186,3 +186,34 @@
 ```
 
 ​		通过一层层封装，total的值得以正确更新。
+
+### 支付
+
+​		跳转到另外一个页面以模拟支付。首先创建另外一个页面需要的pay.html:
+
+![image-20220317184345423](ref/image-20220317184345423.png)
+
+​		将用到的二维码图片放到image下。
+
+![image-20220317184453103](ref/image-20220317184453103.png)
+
+​		接着撰写html文件。同样使用thymeleaf来获取图片。
+
+```html
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <title>Tip</title>
+</head>
+<body>
+<h1>Scan the QR code to pay.The purchase will be cancelled after 15 minutes.</h1>
+<img th:src='@{/images/qrcode.png}' alt='oops.'>
+</body>
+</html>
+
+```
+
+​		最终页面如下：
+
+![image-20220317184608992](ref/image-20220317184608992.png)

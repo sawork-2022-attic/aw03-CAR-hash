@@ -114,9 +114,9 @@
 		<figcaption class="info-wrap">
 			<a href="#" class="title"><span th:text="${product.name}"></span></a>
 			<div class="action-wrap">
-				<a href="#" class="btn btn-primary btn-sm float-right"> <i class="fa fa-cart-plus"></i> Add </a>
+				<a th:href="@{/add?pid={pid}(pid=${product.id})}" class="btn btn-primary btn-sm float-right"> <i class="fa fa-cart-plus"></i> Add </a>
 				<div class="price-wrap h5">
-					<span class="price-new">$1280</span>
+					<span class="price-new" th:text="${product.price}"></span>
 				</div> <!-- price-wrap.// -->
 			</div> <!-- action-wrap -->
 		</figcaption>
@@ -152,24 +152,30 @@
 	</td>
 	<td class="text-center"> 
 		<div class="m-btn-group m-btn-group--pill btn-group mr-2" role="group" aria-label="...">
-																		<button type="button"
-                                                                                class="m-btn btn btn-default"><i
-                                                                                class="fa fa-minus"></i></button>
+                                                                        <button type="button"
+                                                                                class="m-btn btn btn-default">
+                                                                                <a th:href="@{/decrease?pid={pid}(pid=${item.product.id})}">
+                                                                                <i class="fa fa-minus"></i>
+                                                                                </a>
+                                                                        </button>
 																		<button type="button"
                                                                                 class="m-btn btn btn-default"
                                                                                 disabled><span th:text="${item.quantity}"></span></button>
 																		<button type="button"
-                                                                                class="m-btn btn btn-default"><i
-                                                                                class="fa fa-plus"></i></button>
+                                                                                class="m-btn btn btn-default">
+                                                                            <a th:href="@{/increase?pid={pid}(pid=${item.product.id})}">
+                                                                            <i class="fa fa-plus"></i>
+                                                                            </a>
+                                                                        </button>
 																	</div>
 	</td>
 	<td> 
 		<div class="price-wrap"> 
-			<var class="price"><span th:text="${item.product.price}"></span></var>
+			<var class="price"><span th:text="${item.product.price*item.quantity}"></span></var>
 		</div> <!-- price-wrap .// -->
 	</td>
 	<td class="text-right"> 
-	<a href="" class="btn btn-outline-danger"> <i class="fa fa-trash"></i></a>
+	<a th:href="@{/del?pid={pid}(pid=${item.product.id})}" class="btn btn-outline-danger"> <i class="fa fa-trash"></i></a>
 	</td>
 </tr>
 </tbody>
@@ -187,15 +193,15 @@
                     </dl>
                     <dl class="dlist-align">
                         <dt>Sub Total:</dt>
-                        <dd class="text-right">$215</dd>
+                        <dd class="text-right" th:text="${'$'+cart.total}"></dd>
                     </dl>
                     <dl class="dlist-align">
                         <dt>Total:</dt>
-                        <dd class="text-right h4 b"> $215</dd>
+                        <dd class="text-right h4 b" th:text="${'$'+cart.total*1.12}"></dd>
                     </dl>
                     <div class="row">
                         <div class="col-md-6">
-                            <a href="#" class="btn  btn-default btn-error btn-lg btn-block"><i
+                            <a th:href="@{/cancel}" class="btn  btn-default btn-error btn-lg btn-block"><i
                                     class="fa fa-times-circle "></i> Cancel </a>
                         </div>
                         <div class="col-md-6">
